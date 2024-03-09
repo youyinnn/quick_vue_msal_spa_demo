@@ -70,12 +70,12 @@ export default {
       });
     },
     async getToken() {
-      // 1. If we don't create scope by the Expose API in the Azure APP console, you can try {app_id}/.default
+      // 1. If we don't create scope by the Expose API in the Azure APP console, we can try {app_id}/.default
       // see: https://stackoverflow.com/questions/67639910/validation-of-azure-ad-token-signature-is-invalid-the-tokens-signature-resulte
       // 2. If we want to leverage the scope managed by Azure AD, we can follow: https://stackoverflow.com/questions/76009655/using-an-azure-ad-tenant-id-and-a-valid-token-issued-for-a-app-registration
-      // 3. If we want to act like a fool, using the idToken to replace the access_token and send any request to the backend is also doable, but....
-      // 4. Access token acquired out of the cases from the aboved will not be varified by the backend, some ideas can be found: https://authguidance.com/azure-ad-troubleshooting/
-      // so this is necessary:
+      // 3. If we want to act like a fool, using the idToken to replace the access_token and send any request to the backend is also doable, but...
+      // 4. The backend will not verify access tokens acquired from the cases above. Some ideas can be found at https://authguidance.com/azure-ad-troubleshooting/
+      // So this is necessary:
       tokenRequest.scopes = ["a61d496c-f773-4e7a-99b6-01fcbd361df7/.default"];
 
       await msalInstance
