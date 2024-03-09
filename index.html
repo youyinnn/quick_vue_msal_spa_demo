@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <!-- babel-polyfill for IE Promise support -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vue-azure-active-directory"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span v-if="$azure.currentUser">
+      Hello <strong>{{ $azure.currentUser.name }}</strong>
+    </span>
+
+    <button v-if="$azure.currentUser" type="button" @click="$azure.logout">
+      Logout
+    </button>
+    <button v-else type="button" @click="$azure.login">Login</button>
+
+    <pre>{{ $azure.$data }}</pre>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
