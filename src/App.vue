@@ -118,6 +118,10 @@ export default {
       // but, in order to allow external personal user get the access token, we should exposed an api
       // external persional user can only access via exposed api scoped
       tokenRequest.scopes = ["api://" + clientId + "/token"];
+      // 3. If we want to act like a fool, using the idToken to replace the access_token and send any request to the backend is also doable, but...
+      // 4. The backend will not verify access tokens acquired from the cases above. Some ideas can be found at https://authguidance.com/azure-ad-troubleshooting/
+      // So this is necessary:
+      tokenRequest.scopes = ["a61d496c-f773-4e7a-99b6-01fcbd361df7/.default"];
 
       await msalInstance
         .acquireTokenPopup(tokenRequest)
